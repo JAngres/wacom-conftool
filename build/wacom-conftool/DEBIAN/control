@@ -1,0 +1,9 @@
+Package: wacom-conftool
+Version: 1.0
+Section: misc
+Priority: extra
+Architecture: all
+Depends: libgtk-3-0
+Maintainer: Julius Angres <julius.angres@gmx.de>
+Homepage: 
+Description: A graphical frontend to configure Wacom tablets under LXDE

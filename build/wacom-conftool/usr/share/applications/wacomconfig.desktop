@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Settings;
+GenericName=Graphical frontend for configuration of Wacom tablets.
+Exec=wacomconfig
+Icon=/usr/share/icons/wacom-conftool/wacom-icon.png
+Name=Wacom Tablet
+StartupNotify=true
+Terminal=false
+Type=Application
+Keywords=Wacom;Settings
