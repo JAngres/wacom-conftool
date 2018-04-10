@@ -1,6 +1,5 @@
 /* wacomconfig.c */
 /* @author : Julius Angres */
-/* This source code is licensed under GNU GPL v3.0
 /* 09.04.2018 */
 
 #include <gtk/gtk.h>
@@ -21,39 +20,71 @@ static void end (GtkWidget *widget, gpointer daten) {
 // TODO in dev mode only print the commands to be executed by the system utility [use sprintf to build cmd string]
 static void tracking_mode (GtkWidget *widget, gpointer data) {
   gint i = gtk_combo_box_get_active ((GtkComboBox*) widget);
-  if (i==1) g_print ("xsetwacom --set \"%s stylus\" \"Mode\" \"relative\"\n", device_name);
-  else g_print ("xsetwacom --set \"%s stylus\" \"Mode\" \"absolute\"\n", device_name);
+  char cmd[255];
+  if (i==1) {
+    sprintf (cmd, "xsetwacom --set \"%s stylus\" \"Mode\" \"relative\"", device_name);
+    system (cmd);
+  } else {
+    sprintf (cmd, "xsetwacom --set \"%s stylus\" \"Mode\" \"absolute\"", device_name);
+    system (cmd);
+  }
 }
 
 static void orientation_mode (GtkWidget *widget, gpointer data) {
-  if (gtk_switch_get_active ((GtkSwitch*) widget)) g_print ("xsetwacom --set \"%s stylus\" \"Rotate\" \"half\"\n", device_name);
-  else g_print ("xsetwacom --set \"%s stylus\" \"Rotate\" \"none\"\n", device_name);
+  char cmd[255];
+  if (gtk_switch_get_active ((GtkSwitch*) widget)) {
+    sprintf (cmd, "xsetwacom --set \"%s stylus\" \"Rotate\" \"half\"", device_name);
+    system (cmd);
+  } else {
+    sprintf (cmd, "xsetwacom --set \"%s stylus\" \"Rotate\" \"none\"", device_name);
+    system (cmd);
+  }
 }
 
 static void top_btn_action (GtkWidget *widget, gpointer data) {
   g_print ("debug :: ready to set top button action");
+  //TODO add button mapping
 }
 
 static void lower_btn_action (GtkWidget *widget, gpointer data) {
   g_print ("debug :: ready to set lower button action");
+  //TODO add button mapping
 }
 
 /* PressureCurve parameter of xsetwacom. 0->soft, 1->middle, 2->firm */
 static void eraser_pressure_value (GtkAdjustment *adj, gpointer data) {
   gdouble val = gtk_adjustment_get_value(adj);
-  if (val == 0.0) g_print ("xsetwacom -set \"%s eraser\" \"PressureCurve\" \"0 75 25 100\"\n", device_name);
-  else if (val == 0.1) g_print ("xsetwacom -set \"%s eraser\" \"PressureCurve\" \"0 0 100 100\"\n", device_name);
-  else if (val > 0.1) g_print ("xsetwacom -set \"%s eraser\" \"PressureCurve\" \"75 0 100 25\"\n", device_name);
-  else g_print ("invalid value\n");
+  char cmd[255];
+  if (val == 0.0) {
+    sprintf (cmd, "xsetwacom -set \"%s eraser\" \"PressureCurve\" \"0 75 25 100\"", device_name);
+    system (cmd);
+  } else if (val == 0.1) {
+    sprintf (cmd, "xsetwacom -set \"%s eraser\" \"PressureCurve\" \"0 0 100 100\"", device_name);
+    system (cmd);
+  } else if (val > 0.1) {
+    sprintf (cmd, "xsetwacom -set \"%s eraser\" \"PressureCurve\" \"75 0 100 25\"", device_name);
+    system (cmd);
+  } else {
+    g_print ("invalid value\n");
+  }
 }
 
 /* PressureCurve parameter of xsetwacom. 0->soft, 1->middle, 2->firm */
 static void pen_pressure_value (GtkAdjustment *adj, gpointer data) {
   gdouble val = gtk_adjustment_get_value(adj);
-  if (val == 0.0) g_print ("xsetwacom -set \"%s stylus\" \"PressureCurve\" \"0 75 25 100\"\n", device_name);
-  else if (val == 0.1) g_print ("xsetwacom -set \"%s stylus\" \"PressureCurve\" \"0 0 100 100\"\n", device_name);
-  else if (val > 0.1) g_print ("xsetwacom -set \"%s stylus\" \"PressureCurve\" \"75 0 100 25\"\n", device_name);
-  else g_print ("invalid value\n");
+  char cmd[255];
+  if (val == 0.0) {
+    sprintf (cmd, "xsetwacom -set \"%s stylus\" \"PressureCurve\" \"0 75 25 100\"", device_name);
+    system (cmd);
+  } else if (val == 0.1) {
+    sprintf (cmd, "xsetwacom -set \"%s stylus\" \"PressureCurve\" \"0 0 100 100\"", device_name);
+    system (cmd);
+  } else if (val > 0.1) {
+    sprintf (cmd, "xsetwacom -set \"%s stylus\" \"PressureCurve\" \"75 0 100 25\"", device_name);
+    system (cmd);
+  } else {
+    g_print ("invalid value\n");
+  }
 }
 
 
@@ -168,7 +199,6 @@ int main (int argc, char **argv) {
   
   /* pack components */
   // iff no device is detected, length of buffer will be 0
-  // TODO look up corresponding parameters in xsetwacom
   if (strlen(buf) == 0) {
     gtk_container_add (GTK_CONTAINER (win), GTK_WIDGET (grid_nodev));
     gtk_grid_attach (grid_nodev, GTK_WIDGET (nodev_status), 0, 0, 1, 1);
@@ -197,6 +227,5 @@ int main (int argc, char **argv) {
   gtk_widget_show_all (GTK_WIDGET (win));
   /* gtk main loop */
   gtk_main ();
-  g_print ("GTK main loop has been terminated\n");
   return 0;
 }
