@@ -198,8 +198,9 @@ int main (int argc, char **argv) {
   g_signal_connect ( adj2, "value-changed", G_CALLBACK (pen_pressure_value), NULL);
   
   /* pack components */
-  // iff no device is detected, length of buffer will be 0
-  if (strlen(buf) == 0) {
+  // iff no device is detected, length of buffer will be 0 (Debian) or (1 Trisquel)
+  // however, a real device will have a rather long name
+  if (strlen(buf) <= 1) {
     gtk_container_add (GTK_CONTAINER (win), GTK_WIDGET (grid_nodev));
     gtk_grid_attach (grid_nodev, GTK_WIDGET (nodev_status), 0, 0, 1, 1);
     gtk_grid_attach (grid_nodev, GTK_WIDGET (nodev_msg), 0, 1, 1, 1);
