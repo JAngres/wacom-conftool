@@ -17,7 +17,6 @@ static void end (GtkWidget *widget, gpointer daten) {
   gtk_main_quit ();
 }
 
-// TODO in dev mode only print the commands to be executed by the system utility [use sprintf to build cmd string]
 static void tracking_mode (GtkWidget *widget, gpointer data) {
   gint i = gtk_combo_box_get_active ((GtkComboBox*) widget);
   char cmd[255];
@@ -133,7 +132,7 @@ int main (int argc, char **argv) {
   top_btn_box = gtk_combo_box_text_new ();
   lower_btn_box = gtk_combo_box_text_new ();
   gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "No Action");
-  gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "Left Mouse Button Click");
+  /*gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "Left Mouse Button Click");
   gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "Middle Mouse Button Click");
   gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "Right Mouse Button Click");
   gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "Scroll Up");
@@ -141,9 +140,9 @@ int main (int argc, char **argv) {
   gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "Scroll Left");
   gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "Scroll Right");
   gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "Back");
-  gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "Forward");
+  gtk_combo_box_text_append_text ((GtkComboBoxText*) top_btn_box, "Forward");*/
   gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "No Action");
-  gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "Left Mouse Button Click");
+  /*gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "Left Mouse Button Click");
   gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "Middle Mouse Button Click");
   gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "Right Mouse Button Click");
   gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "Scroll Up");
@@ -151,7 +150,7 @@ int main (int argc, char **argv) {
   gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "Scroll Left");
   gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "Scroll Right");
   gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "Back");
-  gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "Forward");
+  gtk_combo_box_text_append_text ((GtkComboBoxText*) lower_btn_box, "Forward");*/
   gtk_combo_box_set_active ((GtkComboBox*) top_btn_box, 0);
   gtk_combo_box_set_active ((GtkComboBox*) lower_btn_box, 0);
   
